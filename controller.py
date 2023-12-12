@@ -6,3 +6,6 @@ def comtrol():
     for e in event:
         if e.type==pygame.QUIT:
             exit()
+        if e.type==pygame.KEYDOWN and e.key==pygame.K_TAB:
+            model.event_for_debug=not model.event_for_debug
+
