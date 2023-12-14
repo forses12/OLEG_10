@@ -1,11 +1,11 @@
-import pygame,player
+import pygame,player,enemy
 
 p=player.Player([600,500])
-p.sozdowatel()
+
+q=enemy.Enemy('images/flies/butterfly_red1.png',[100,100])
+w=enemy.Enemy('images/flies/big_green1.png',[200,100])
+
 event_for_debug=False
 def model():
-    debug()
-def debug():
-    if event_for_debug:
-        p.sozdowatel_debug()
+    pass
 
