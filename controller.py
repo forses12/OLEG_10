@@ -10,4 +10,6 @@ def comtrol():
             exit()
         if e.type==pygame.KEYDOWN and e.key==pygame.K_TAB:
             model.event_for_debug=not model.event_for_debug
+        if e.type==pygame.KEYDOWN and e.key==pygame.K_q:
+            model.normal_paint=not model.normal_paint
 

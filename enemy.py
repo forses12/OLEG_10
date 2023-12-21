@@ -5,8 +5,7 @@ class Enemy:
     def __init__(self, who, where):
         self.who = who
         self.image1 = self.who
-        self.image2 = self.who.replace('1','2')
-
+        self.image2 = self.who.replace('1', '2')
 
         self.images = pygame.image.load(self.image1)
         self.images1 = pygame.image.load(self.image2)
@@ -18,31 +17,31 @@ class Enemy:
 
         self.p = pygame.event.custom_type()
         pygame.time.set_timer(self.p, 500)
-        self.b=True
+        self.changed_picture = True
 
     def a_che(self):
-        if self.b:
-            image=self.images1
-
+        if self.changed_picture:
+            image = self.images1
+            self.size = [self.images1.get_width() * 4, self.images1.get_height() * 4]
         else:
-            image=self.images
+            image = self.images
+            self.size = [self.images.get_width() * 4, self.images.get_height() * 4]
+        self.changed_picture = not self.changed_picture
 
-        self.b= not self.b
+        center = self.rect.center
+        self.rect = pygame.Rect(self.rect.topleft, self.size)
+        self.rect.center = center
+
         self.image = pygame.transform.scale(image, self.size)
+
     def sozdowatel(self):
         self.screen.blit(self.image, self.rect)
 
     def sozdowatel_debug(self):
         pygame.draw.rect(self.screen, [255, 255, 255], self.rect, 2)
 
-    def go(self,event):
+    def go(self, event):
         for i in event:
-            if i.type==self.p:
-                self.rect.centerx += 6
+            if i.type == self.p:
+                self.rect.centerx += 5
                 self.a_che()
-
-
-
-
-
-
