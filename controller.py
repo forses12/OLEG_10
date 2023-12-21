@@ -13,3 +13,5 @@ def comtrol():
         if e.type==pygame.KEYDOWN and e.key==pygame.K_q:
             model.normal_paint=not model.normal_paint
 
+
+

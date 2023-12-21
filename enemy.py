@@ -6,6 +6,7 @@ class Enemy:
         self.who = who
         self.image1 = self.who
         self.image2 = self.who.replace('1', '2')
+        self.where=where
 
         self.images = pygame.image.load(self.image1)
         self.images1 = pygame.image.load(self.image2)
@@ -41,7 +42,12 @@ class Enemy:
         pygame.draw.rect(self.screen, [255, 255, 255], self.rect, 2)
 
     def go(self, event):
+        speedx=5
+        speedy=5
         for i in event:
+            if True:
+                if self.rect.right>=self.where[0]+100 and speedx>0:
+                    speedx=-speedx
             if i.type == self.p:
-                self.rect.centerx += 5
+                self.rect.centerx += speedx
                 self.a_che()
