@@ -3,8 +3,8 @@ import pygame, model
 def comtrol():
     event=pygame.event.get()
     model.p.control(event)
-    model.q.go(event)
-    model.w.go(event)
+    model.q.control(event)
+    model.w.control(event)
     for e in event:
         if e.type==pygame.QUIT:
             exit()
