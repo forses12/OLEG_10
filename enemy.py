@@ -23,6 +23,7 @@ class Enemy:
         self.leftx=left
         self.rightx=right
         self.speedx=step
+        self.walk=True
 
     def a_che(self):
         if self.changed_picture:
@@ -50,10 +51,10 @@ class Enemy:
 
     def control(self, event):
         for i in event:
-            if i.type == self.p:
+            if i.type == self.p and self.walk:
                 self.go()
 
-            pass
+                pass
     def go(self):
 
             self.rect.centerx += self.speedx
