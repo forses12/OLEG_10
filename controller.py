@@ -15,6 +15,11 @@ def comtrol():
         if e.type == pygame.KEYDOWN and e.key == pygame.K_a:
             model.q.walk = not model.q.walk
             model.w.walk = not model.w.walk
+        if e.type==pygame.KEYDOWN and e.key==pygame.K_s:
+            model.q.go_rotate(45)
+        if e.type==pygame.KEYDOWN and e.key==pygame.K_d:
+            model.q.go_rotate(111)
+
 
 
 

@@ -24,7 +24,7 @@ class Enemy:
         self.rightx=right
         self.speedx=step
         self.walk=True
-
+        self.how_many_rotate=0
     def a_che(self):
         if self.changed_picture:
             image = self.images1
@@ -65,3 +65,9 @@ class Enemy:
             elif self.rect.left <= self.leftx and self.speedx < 0:
                 self.rect.left = self.leftx
                 self.speedx = -self.speedx
+    def go_rotate(self,angle):
+        self.walk=False
+        if self.how_many_rotate!=angle:
+            self.image=pygame.transform.rotate(self.image,self.how_many_rotate)
+            self.image=pygame.transform.rotate(self.image,-angle)
+            self.how_many_rotate=angle
