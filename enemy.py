@@ -11,10 +11,11 @@ class Enemy:
         self.images = pygame.image.load(self.image1)
         self.images1 = pygame.image.load(self.image2)
         self.size = [self.images.get_width() * 4, self.images.get_height() * 4]
-        self.image = pygame.transform.scale(self.images, self.size)
+        self.image = pygame.transform.scale(self.images,    self.size )
+        self.image_finale = pygame.transform.scale(self.images,   self.size )
 
         self.screen = pygame.display.get_surface()
-        self.rect = pygame.Rect(where, self.size)
+        self.rect = pygame.Rect(where, self.image_finale.get_size())
 
         self.p = pygame.event.custom_type()
         pygame.time.set_timer(self.p, step_delay )
@@ -38,10 +39,10 @@ class Enemy:
         self.rect = pygame.Rect(self.rect.topleft, self.size)
         self.rect.center = center
 
-        self.image = pygame.transform.scale(image, self.size)
+        self.image_finale = pygame.transform.scale(image, self.size)
 
     def sozdowatel(self):
-        self.screen.blit(self.image, self.rect)
+        self.screen.blit(self.image_finale, self.rect)
 
     def sozdowatel_debug(self):
         pygame.draw.rect(self.screen, [255, 255, 255], self.rect, 2)
@@ -68,6 +69,7 @@ class Enemy:
     def go_rotate(self,angle):
         self.walk=False
         if self.how_many_rotate!=angle:
-            self.image=pygame.transform.rotate(self.image,self.how_many_rotate)
-            self.image=pygame.transform.rotate(self.image,-angle)
+
+            self.image_finale=pygame.transform.rotate(self.image, -angle)
             self.how_many_rotate=angle
+            self.rect.size=self.image_finale.get_size()
