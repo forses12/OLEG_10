@@ -13,11 +13,13 @@ def view():
     screen.fill([0, 0, 0])
     if model.normal_paint:
         model.p.sozdowatel()
-        model.q.sozdowatel()
-        model.w.sozdowatel()
+        for a in model.q:
+            a.sozdowatel()
+
 
     debug(model.p)
-    debug(model.q)
-    debug(model.w)
+    for a in model.q:
+        debug(a)
+
 
     pygame.display.flip()

@@ -35,14 +35,16 @@ class Enemy:
             self.size = [self.images.get_width() * 4, self.images.get_height() * 4]
         self.changed_picture = not self.changed_picture
 
-        center = self.rect.center
-        self.rect = pygame.Rect(self.rect.topleft, self.size)
-        self.rect.center = center
+        self.remake_center(self.size)
 
         self.image_finale = pygame.transform.scale(image, self.size)
 
     def sozdowatel(self):
         self.screen.blit(self.image_finale, self.rect)
+    def remake_center(self,size):
+        center=self.rect.center
+        self.rect.size = size
+        self.rect.center=center
 
     def sozdowatel_debug(self):
         pygame.draw.rect(self.screen, [255, 255, 255], self.rect, 2)
@@ -72,4 +74,4 @@ class Enemy:
 
             self.image_finale=pygame.transform.rotate(self.image, -angle)
             self.how_many_rotate=angle
-            self.rect.size=self.image_finale.get_size()
+            self.remake_center(self.image_finale.get_size())
