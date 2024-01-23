@@ -19,12 +19,15 @@ class Enemy:
 
         self.p = pygame.event.custom_type()
         pygame.time.set_timer(self.p, step_delay )
+        self.m = pygame.event.custom_type()
+        pygame.time.set_timer(self.m, 10)
         self.changed_picture = True
 
         self.leftx=left
         self.rightx=right
         self.speedx=step
         self.walk=True
+        self.angle=0
         self.how_many_rotate=0
     def a_che(self):
         if self.changed_picture:
@@ -56,6 +59,9 @@ class Enemy:
         for i in event:
             if i.type == self.p and self.walk:
                 self.go()
+            if i.type == self.m:
+                self.go_rotate()
+
 
                 pass
     def go(self):
@@ -68,10 +74,23 @@ class Enemy:
             elif self.rect.left <= self.leftx and self.speedx < 0:
                 self.rect.left = self.leftx
                 self.speedx = -self.speedx
-    def go_rotate(self,angle):
-        self.walk=False
-        if self.how_many_rotate!=angle:
+    def rotate(self,znak):
+        self.walk = False
+        self.image_finale = pygame.transform.rotate(self.image, -self.how_many_rotate)
+        self.how_many_rotate += znak*1
+        self.remake_center(self.image_finale.get_size())
+    def go_rotate(self):
+        if self.how_many_rotate<self.angle:
+            self.rotate(1)
+        elif self.how_many_rotate>self.angle:
+            self.rotate(-1)
 
-            self.image_finale=pygame.transform.rotate(self.image, -angle)
-            self.how_many_rotate=angle
-            self.remake_center(self.image_finale.get_size())
+
+
+
+
+        # if self.how_many_rotate!=angle:
+        #
+        #     self.image_finale=pygame.transform.rotate(self.image, -angle)
+        #     self.how_many_rotate=angle
+        #     self.remake_center(self.image_finale.get_size())
