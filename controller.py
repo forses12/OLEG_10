@@ -15,12 +15,15 @@ def comtrol():
             model.normal_paint=not model.normal_paint
         if e.type == pygame.KEYDOWN and e.key == pygame.K_a:
 
-            model.q[0].walk = not model.q[0].walk
+            model.q[0].go_walk()
+
 
         if e.type==pygame.KEYDOWN and e.key==pygame.K_s:
-            model.q[0].angle=45
+            model.q[0].start_go_rotate(0)
+
         if e.type==pygame.KEYDOWN and e.key==pygame.K_d:
-            model.q[0].angle=111
+            model.q[0].start_go_rotate(111)
+
 
 
 

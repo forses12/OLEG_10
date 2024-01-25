@@ -48,6 +48,9 @@ class Enemy:
         center=self.rect.center
         self.rect.size = size
         self.rect.center=center
+    def go_walk(self):
+         self.walk=True
+
 
     def sozdowatel_debug(self):
         pygame.draw.rect(self.screen, [255, 255, 255], self.rect, 2)
@@ -74,8 +77,13 @@ class Enemy:
             elif self.rect.left <= self.leftx and self.speedx < 0:
                 self.rect.left = self.leftx
                 self.speedx = -self.speedx
-    def rotate(self,znak):
+    def start_go_rotate(self,angle):
         self.walk = False
+        self.angle=angle
+
+
+
+    def rotate(self,znak):
         self.image_finale = pygame.transform.rotate(self.image, -self.how_many_rotate)
         self.how_many_rotate += znak*1
         self.remake_center(self.image_finale.get_size())
