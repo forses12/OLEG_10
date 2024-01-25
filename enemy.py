@@ -29,7 +29,7 @@ class Enemy:
         self.walk=True
         self.angle=0
         self.how_many_rotate=0
-    def a_che(self):
+    def _a_che(self):
         if self.changed_picture:
             image = self.images1
             self.size = [self.images1.get_width() * 4, self.images1.get_height() * 4]
@@ -38,13 +38,13 @@ class Enemy:
             self.size = [self.images.get_width() * 4, self.images.get_height() * 4]
         self.changed_picture = not self.changed_picture
 
-        self.remake_center(self.size)
+        self._remake_center(self.size)
 
         self.image_finale = pygame.transform.scale(image, self.size)
 
     def sozdowatel(self):
         self.screen.blit(self.image_finale, self.rect)
-    def remake_center(self,size):
+    def _remake_center(self,size):
         center=self.rect.center
         self.rect.size = size
         self.rect.center=center
@@ -61,16 +61,20 @@ class Enemy:
     def control(self, event):
         for i in event:
             if i.type == self.p and self.walk:
-                self.go()
+                self._go()
             if i.type == self.m:
-                self.go_rotate()
+                self._go_rotate()
+            if i.type == self.p and not self.walk:
+                self._tp()
+
+
 
 
                 pass
-    def go(self):
+    def _go(self):
 
             self.rect.centerx += self.speedx
-            self.a_che()
+            self._a_che()
             if self.rect.right >= self.rightx and self.speedx > 0:
                 self.rect.right = self.rightx
                 self.speedx = -self.speedx
@@ -83,19 +87,21 @@ class Enemy:
 
 
 
-    def rotate(self,znak):
+    def _rotate(self,znak):
         self.image_finale = pygame.transform.rotate(self.image, -self.how_many_rotate)
         self.how_many_rotate += znak*1
-        self.remake_center(self.image_finale.get_size())
-    def go_rotate(self):
+        self._remake_center(self.image_finale.get_size())
+    def _go_rotate(self):
         if self.how_many_rotate<self.angle:
-            self.rotate(1)
+            self._rotate(1)
         elif self.how_many_rotate>self.angle:
-            self.rotate(-1)
+            self._rotate(-1)
 
-
-
-
+    def go_tp(self, xy):
+        self.walk=False
+        self.xy=xy
+    def _tp(self):
+        pass
 
         # if self.how_many_rotate!=angle:
         #
