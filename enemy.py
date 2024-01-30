@@ -1,3 +1,5 @@
+import math
+
 import pygame
 
 
@@ -29,6 +31,7 @@ class Enemy:
         self.walk=True
         self.angle=0
         self.how_many_rotate=0
+        self.let_go_tp=False
     def _a_che(self):
         if self.changed_picture:
             image = self.images1
@@ -64,7 +67,7 @@ class Enemy:
                 self._go()
             if i.type == self.m:
                 self._go_rotate()
-            if i.type == self.p and not self.walk:
+            if i.type == self.p and self.let_go_tp :
                 self._tp()
 
 
@@ -99,9 +102,16 @@ class Enemy:
 
     def go_tp(self, xy):
         self.walk=False
-        self.xy=xy
+        distanse=math.dist(self.rect.center,xy)
+        d_xy=[xy[0]-self.rect.centerx,xy[1]-self.rect.centery]
+        procent=10/distanse
+        self.tp_speedxy=[d_xy[0]*procent,d_xy[0]*procent]
+        self.let_go_tp=True
     def _tp(self):
-        pass
+        self.rect.centerx+=self.tp_speedxy[0]
+        self.rect.centery+=self.tp_speedxy[1]
+
+
 
         # if self.how_many_rotate!=angle:
         #
