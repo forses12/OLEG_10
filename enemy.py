@@ -23,6 +23,8 @@ class Enemy:
         pygame.time.set_timer(self.p, step_delay )
         self.m = pygame.event.custom_type()
         pygame.time.set_timer(self.m, 10)
+        self.l = pygame.event.custom_type()
+        pygame.time.set_timer(self.l, 10)
         self.changed_picture = True
 
         self.leftx=left
@@ -67,7 +69,7 @@ class Enemy:
                 self._go()
             if i.type == self.m:
                 self._go_rotate()
-            if i.type == self.p and self.let_go_tp :
+            if i.type == self.l  and self.let_go_tp :
                 self._tp()
 
 
@@ -102,14 +104,31 @@ class Enemy:
 
     def go_tp(self, xy):
         self.walk=False
+        self.xy=xy
         distanse=math.dist(self.rect.center,xy)
+
         d_xy=[xy[0]-self.rect.centerx,xy[1]-self.rect.centery]
-        procent=10/distanse
-        self.tp_speedxy=[d_xy[0]*procent,d_xy[0]*procent]
+        procent=3/distanse
+        self.tp_speedxy=[d_xy[0]*procent,d_xy[1]*procent]
+        self.tp_rect = [self.rect.centerx, self.rect.centery]
         self.let_go_tp=True
+
     def _tp(self):
-        self.rect.centerx+=self.tp_speedxy[0]
-        self.rect.centery+=self.tp_speedxy[1]
+        if (self.tp_speedxy[0] > 0 and self.rect.centerx < self.xy[0]) \
+                or (self.tp_speedxy[0] < 0 and self.rect.centerx > self.xy[0]):
+            print(self.rect.center)
+            print(self.tp_speedxy)
+            self.tp_rect[0]+=self.tp_speedxy[0]
+            self.tp_rect[1]+=self.tp_speedxy[1]
+
+
+            self.rect.centerx=self.tp_rect[0]
+            self.rect.centery=self.tp_rect[1]
+            print(self.rect.center)
+            print('-------------------------------')
+        else:
+            self.let_go_tp=False
+            self.rect.center=self.xy
 
 
 
