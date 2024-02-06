@@ -25,7 +25,8 @@ def comtrol():
         if e.type==pygame.KEYDOWN and e.key==pygame.K_d:
             model.q[0].start_go_rotate(111)
         if e.type==pygame.KEYDOWN and e.key==pygame.K_SPACE:
-            model.q[0].go_tp([random.randint(100,900),random.randint(100,600)])
+            model.q[0].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
+                              [random.randint(100, 900), random.randint(100, 600)]])
 
 
 

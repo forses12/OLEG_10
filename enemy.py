@@ -4,7 +4,7 @@ import pygame
 
 
 class Enemy:
-    def __init__(self, who, where,left,right,step_delay,step):
+    def __init__(self, who, where,left,right,step_delay,step,speedtp):
         self.who = who
         self.image1 = self.who
         self.image2 = self.who.replace('1', '2')
@@ -34,6 +34,7 @@ class Enemy:
         self.angle=0
         self.how_many_rotate=0
         self.let_go_tp=False
+        self.speedtp=speedtp
     def _a_che(self):
         if self.changed_picture:
             image = self.images1
@@ -71,6 +72,7 @@ class Enemy:
                 self._go_rotate()
             if i.type == self.l  and self.let_go_tp :
                 self._tp()
+                self.lot_of_tp(self.xyz)
 
 
 
@@ -89,6 +91,13 @@ class Enemy:
     def start_go_rotate(self,angle):
         self.walk = False
         self.angle=angle
+    def lot_of_tp(self,xy):
+        if self.let_go_tp==False and len(xy)!=0:
+            self.go_tp(xy[0])
+            self.xyz=xy
+            del xy[0]
+
+
 
 
 
@@ -108,7 +117,7 @@ class Enemy:
         distanse=math.dist(self.rect.center,xy)
 
         d_xy=[xy[0]-self.rect.centerx,xy[1]-self.rect.centery]
-        procent=3/distanse
+        procent=self.speedtp/distanse
         self.tp_speedxy=[d_xy[0]*procent,d_xy[1]*procent]
         self.tp_rect = [self.rect.centerx, self.rect.centery]
         self.let_go_tp=True
