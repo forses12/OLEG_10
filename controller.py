@@ -27,7 +27,22 @@ def comtrol():
         if e.type==pygame.KEYDOWN and e.key==pygame.K_SPACE:
             model.q[0].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
                               [random.randint(100, 900), random.randint(100, 600)]])
-
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_g:
+            model.q[0].go_free_fly([
+                {
+                    'x': 100,
+                    'y':100,
+                    'speed':1.5,
+                    'angle':3
+                }
+                ,
+                {
+                    'x': 500,
+                    'y': 500,
+                    'speed': 3,
+                    'angle': 3
+                }
+            ])
 
 
 

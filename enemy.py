@@ -1,6 +1,6 @@
 import math
 
-import pygame
+import pygame, math_utils
 
 
 class Enemy:
@@ -35,6 +35,7 @@ class Enemy:
         self.how_many_rotate=0
         self.let_go_tp=False
         self.speedtp=speedtp
+        self.fly=False
     def _a_che(self):
         if self.changed_picture:
             image = self.images1
@@ -73,11 +74,10 @@ class Enemy:
             if i.type == self.l  and self.let_go_tp :
                 self._tp()
                 self.lot_of_tp(self.xyz)
+            if i.type == self.l and self.fly:
+                self.free_fly()
 
 
-
-
-                pass
     def _go(self):
 
             self.rect.centerx += self.speedx
@@ -138,6 +138,18 @@ class Enemy:
         else:
             self.let_go_tp=False
             self.rect.center=self.xy
+
+    def go_free_fly(self,xy):
+        self.fly=True
+        self.walk=False
+        self.xy_fly=xy
+
+    def free_fly(self):
+        print('fghjkl')
+        self.how_many_rotate+=self.xy_fly[0]['angle']
+        xy_tp = math_utils.get_point_by_angle([*self.rect.center], -self.how_many_rotate, self.xy_fly[0]['speed'])
+        self.rect.center=xy_tp
+
 
 
 
