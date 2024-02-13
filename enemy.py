@@ -145,10 +145,18 @@ class Enemy:
         self.xy_fly=xy
 
     def free_fly(self):
-        print('fghjkl')
-        self.how_many_rotate+=self.xy_fly[0]['angle']
-        xy_tp = math_utils.get_point_by_angle([*self.rect.center], -self.how_many_rotate, self.xy_fly[0]['speed'])
-        self.rect.center=xy_tp
+        self.how_many_rotate=self.how_many_rotate%360
+        u=360-math_utils.get_angle_by_point(self.rect.center,[self.xy_fly[0]['x'],self.xy_fly[0]['y']])
+        print(self.how_many_rotate,u)
+        if self.how_many_rotate!=u:
+            xy_tp = math_utils.get_point_by_angle([*self.rect.center], -self.how_many_rotate, self.xy_fly[0]['speed'])
+            self.rect.center=xy_tp
+            if self.how_many_rotate<u:
+                self.how_many_rotate+=self.xy_fly[0]['angle']
+            else:
+                self.how_many_rotate -= self.xy_fly[0]['angle']
+
+
 
 
 
