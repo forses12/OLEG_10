@@ -30,7 +30,7 @@ def comtrol():
         if e.type == pygame.KEYDOWN and e.key == pygame.K_g:
             model.q[0].go_free_fly([
                 {
-                    'x': 600,
+                    'x': 95,
                     'y':100,
                     'speed':1.5,
                     'angle':3
@@ -40,7 +40,7 @@ def comtrol():
                     'x': 500,
                     'y': 500,
                     'speed': 3,
-                    'angle': 3
+                    'angle': -3
                 }
             ])
 

@@ -18,6 +18,7 @@ class Enemy:
 
         self.screen = pygame.display.get_surface()
         self.rect = pygame.Rect(where, self.image_finale.get_size())
+        self.rect.center=where
 
         self.p = pygame.event.custom_type()
         pygame.time.set_timer(self.p, step_delay)
@@ -155,12 +156,15 @@ class Enemy:
         u = 360 - math_utils.get_angle_by_point(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
         if m > 6:
             xy_tp = math_utils.get_point_by_angle([*self.rect.center], -self.how_many_rotate, self.xy_fly[0]['speed'])
-            print(xy_tp, m)
+            print(self.how_many_rotate, u)
             self.rect.center = xy_tp
-            if self.how_many_rotate + 3 >= u and self.how_many_rotate - 3 <= u:
+            o=u-360
+            if self.how_many_rotate + 3 >= u and self.how_many_rotate - 3 <= u or self.how_many_rotate-3<=o:
                 self.how_many_rotate = u
             else:
                 self.how_many_rotate += self.xy_fly[0]['angle']
+        elif len(self.xy_fly)>1:
+            del self.xy_fly[0]
         else:
             self.let_go_rotate = False
             self.fly = False
