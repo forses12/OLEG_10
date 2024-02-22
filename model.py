@@ -2,7 +2,7 @@ import pygame,player,enemy
 
 p=player.Player([600,500])
 
-q=(enemy.Enemy('images/flies/butterfly_red1.png',[100,600],90,300,500,30,1.5),
+q=(enemy.Enemy('images/flies/butterfly_red1.png',[500,-40],90,300,500,30,1.5),
 # enemy.Enemy('images/flies/butterfly_red1.png',[170,100],160,370,500,30),
 # enemy.Enemy('images/flies/butterfly_red1.png',[240,100],230,440,500,30),
 # enemy.Enemy('images/flies/butterfly_red1.png',[310,100],300,510,500,30),

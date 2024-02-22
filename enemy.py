@@ -36,6 +36,7 @@ class Enemy:
         self.how_many_rotate = 0
         self.let_go_tp = False
         self.speedtp = speedtp
+        self.xy_fly=[]
         self.fly = False
         self.let_go_rotate = True
 
@@ -68,7 +69,8 @@ class Enemy:
         pygame.draw.rect(self.screen, [255, 255, 255], self.rect, 2)
         pygame.draw.line(self.screen, [255, 0, 255], [self.leftx, self.rect.top], [self.leftx, self.rect.bottom], 2)
         pygame.draw.line(self.screen, [255, 0, 255], [self.rightx, self.rect.top], [self.rightx, self.rect.bottom], 2)
-
+        for a in self.xy_fly:
+            pygame.draw.circle(self.screen,[255,0,0],[a['x'],a['y']],3)
     def control(self, event):
         for i in event:
             if i.type == self.p and self.walk:
@@ -154,12 +156,13 @@ class Enemy:
         self.how_many_rotate = self.how_many_rotate % 360
         m = math.dist(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
         u = 360 - math_utils.get_angle_by_point(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
-        if m > 6:
+        if m > self.xy_fly[0]['speed']*2:
+            self.let_go_rotate = True
             xy_tp = math_utils.get_point_by_angle([*self.rect.center], -self.how_many_rotate, self.xy_fly[0]['speed'])
-            print(self.how_many_rotate, u)
+
             self.rect.center = xy_tp
             o=u-360
-            if self.how_many_rotate + 3 >= u and self.how_many_rotate - 3 <= u or self.how_many_rotate-3<=o:
+            if self.how_many_rotate + abs(self.xy_fly[0]['angle'])*2 >= u and self.how_many_rotate - abs(self.xy_fly[0]['angle']*2)<= u or self.how_many_rotate-abs(self.xy_fly[0]['angle']*2)<=o:
                 self.how_many_rotate = u
             else:
                 self.how_many_rotate += self.xy_fly[0]['angle']
@@ -168,7 +171,10 @@ class Enemy:
         else:
             self.let_go_rotate = False
             self.fly = False
-
+            print('stop')
+        print(self.xy_fly)
+        print('------------------------')
+        print(m)
         # if self.how_many_rotate!=angle:
         #
         #     self.image_finale=pygame.transform.rotate(self.image, -angle)
