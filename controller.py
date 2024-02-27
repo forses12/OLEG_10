@@ -56,6 +56,13 @@ def comtrol():
                     'speed': 4,
                     'angle': -5
                 }
+                ,
+                {
+                    'x': 'walk',
+                    'speed': 4,
+                    'angle': -5
+
+                }
             ])
 
 

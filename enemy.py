@@ -4,7 +4,7 @@ import pygame, math_utils
 
 
 class Enemy:
-    def __init__(self, who, where, left, right, step_delay, step, speedtp):
+    def __init__(self, who, where,y, left, right, step_delay, step, speedtp):
         self.who = who
         self.image1 = self.who
         self.image2 = self.who.replace('1', '2')
@@ -39,6 +39,10 @@ class Enemy:
         self.xy_fly=[]
         self.fly = False
         self.let_go_rotate = True
+        self.where_walk_enemy=self.rect.copy()
+        self.where_walk_enemy.center=[left+0.5*(right-left),y]
+
+
 
     def _a_che(self):
         if self.changed_picture:
@@ -67,14 +71,17 @@ class Enemy:
 
     def sozdowatel_debug(self):
         pygame.draw.rect(self.screen, [255, 255, 255], self.rect, 2)
+        pygame.draw.rect(self.screen, [255,0, 255], self.where_walk_enemy, 2)
         pygame.draw.line(self.screen, [255, 0, 255], [self.leftx, self.rect.top], [self.leftx, self.rect.bottom], 2)
         pygame.draw.line(self.screen, [255, 0, 255], [self.rightx, self.rect.top], [self.rightx, self.rect.bottom], 2)
         for a in self.xy_fly:
             pygame.draw.circle(self.screen,[255,0,0],[a['x'],a['y']],3)
     def control(self, event):
         for i in event:
-            if i.type == self.p and self.walk:
+            if i.type == self.p:
                 self._go()
+            if i.type == self.p and self.walk:
+                self.real_walk()
             if i.type == self.m and self.let_go_rotate:
                 self._go_rotate()
             if i.type == self.l and self.let_go_tp:
@@ -85,14 +92,16 @@ class Enemy:
 
     def _go(self):
 
-        self.rect.centerx += self.speedx
+        self.where_walk_enemy.centerx += self.speedx
         self._a_che()
-        if self.rect.right >= self.rightx and self.speedx > 0:
-            self.rect.right = self.rightx
+        if self.where_walk_enemy.right >= self.rightx and self.speedx > 0:
+            self.where_walk_enemy.right = self.rightx
             self.speedx = -self.speedx
-        elif self.rect.left <= self.leftx and self.speedx < 0:
-            self.rect.left = self.leftx
+        elif self.where_walk_enemy.left <= self.leftx and self.speedx < 0:
+            self.where_walk_enemy.left = self.leftx
             self.speedx = -self.speedx
+    def real_walk(self):
+        self.rect.center=self.where_walk_enemy.center
 
     def start_go_rotate(self, angle):
         self.walk = False
