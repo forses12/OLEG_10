@@ -31,7 +31,7 @@ class Enemy:
         self.leftx = left
         self.rightx = right
         self.speedx = step
-        self.walk = True
+        self.walk = False
         self.angle = 0
         self.how_many_rotate = 0
         self.let_go_tp = False
@@ -75,7 +75,8 @@ class Enemy:
         pygame.draw.line(self.screen, [255, 0, 255], [self.leftx, self.rect.top], [self.leftx, self.rect.bottom], 2)
         pygame.draw.line(self.screen, [255, 0, 255], [self.rightx, self.rect.top], [self.rightx, self.rect.bottom], 2)
         for a in self.xy_fly:
-            pygame.draw.circle(self.screen,[255,0,0],[a['x'],a['y']],3)
+            if 'x' in a.keys():
+                pygame.draw.circle(self.screen,[255,0,0],[a['x'],a['y']],3)
     def control(self, event):
         for i in event:
             if i.type == self.p:
@@ -162,6 +163,9 @@ class Enemy:
         self.xy_fly = xy
 
     def free_fly(self):
+        if 'mode' in self.xy_fly[0].keys() and self.xy_fly[0]['mode'] == 'walk':
+            self.xy_fly[0]['x']=self.where_walk_enemy.centerx
+            self.xy_fly[0]['y'] = self.where_walk_enemy.centery
         self.how_many_rotate = self.how_many_rotate % 360
         m = math.dist(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
         u = 360 - math_utils.get_angle_by_point(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
@@ -175,11 +179,16 @@ class Enemy:
                 self.how_many_rotate = u
             else:
                 self.how_many_rotate += self.xy_fly[0]['angle']
+
+
         elif len(self.xy_fly)>1:
             del self.xy_fly[0]
+
+
         else:
             self.let_go_rotate = False
             self.fly = False
+            self.walk=True
             print('stop')
         print(self.xy_fly)
         print('------------------------')

@@ -25,45 +25,54 @@ def comtrol():
         if e.type==pygame.KEYDOWN and e.key==pygame.K_d:
             model.q[0].start_go_rotate(111)
         if e.type==pygame.KEYDOWN and e.key==pygame.K_SPACE:
-            model.q[0].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
-                              [random.randint(100, 900), random.randint(100, 600)]])
+            for a in range(len(model.q)):
+                model.q[a].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
+                                  [random.randint(100, 900), random.randint(100, 600)]])
         if e.type == pygame.KEYDOWN and e.key == pygame.K_g:
-            model.q[0].go_free_fly([
-                {
-                    'x': 150,
-                    'y':400,
-                    'speed':4,
-                    'angle':-3
-                }
-                ,
-                {
-                    'x': 375,
-                    'y': 500,
-                    'speed': 3,
-                    'angle': -1
-                }
-                ,
-                {
-                    'x': 480,
-                    'y': 400,
-                    'speed': 4,
-                    'angle': -1
-                }
-                ,
-                {
-                    'x': 500,
-                    'y': 200,
-                    'speed': 4,
-                    'angle': -5
-                }
-                ,
-                {
-                    'x': 'walk',
-                    'speed': 4,
-                    'angle': -5
+            for a in range(len(model.q)):
+                model.q[a].go_free_fly([
+                    {
+                        'x': 50,
+                        'y': 50,
+                        'speed': 4,
+                        'angle': -3
+                    }
+                    ,
+                    {
+                        'x': 150,
+                        'y':400,
+                        'speed':4,
+                        'angle':-3
+                    }
+                    ,
+                    {
+                        'x': 375,
+                        'y': 500,
+                        'speed': 3,
+                        'angle': -1
+                    }
+                    ,
+                    {
+                        'x': 480,
+                        'y': 400,
+                        'speed': 4,
+                        'angle': -1
+                    }
+                    ,
+                    {
+                        'x': 300,
+                        'y': 200,
+                        'speed': 4,
+                        'angle': -5
+                    }
+                    ,
+                    {
+                        'mode': 'walk',
+                        'speed': 4,
+                        'angle': -5
 
-                }
-            ])
+                    }
+                ])
 
 
 

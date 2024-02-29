@@ -3,10 +3,10 @@ import pygame,player,enemy
 p=player.Player([600,500])
 
 q=(enemy.Enemy('images/flies/butterfly_red1.png',[500,-40],100,90,300,500,30,1.5),
-# enemy.Enemy('images/flies/butterfly_red1.png',[170,100],160,370,500,30),
-# enemy.Enemy('images/flies/butterfly_red1.png',[240,100],230,440,500,30),
-# enemy.Enemy('images/flies/butterfly_red1.png',[310,100],300,510,500,30),
-# enemy.Enemy('images/flies/butterfly_red1.png',[380,100],370,580,500,30),
+enemy.Enemy('images/flies/butterfly_red1.png',[550,-60],100,90,370,500,30,1.5),
+enemy.Enemy('images/flies/butterfly_red1.png',[600,-80],100,90,440,500,30,1.5),
+enemy.Enemy('images/flies/butterfly_red1.png',[650,-100],100,90,510,500,30,1.5),
+enemy.Enemy('images/flies/butterfly_red1.png',[700,-120],100,90,580,500,30,1.5),
 )
 q[0].walk=False
 
