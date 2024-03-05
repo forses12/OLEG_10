@@ -4,7 +4,7 @@ import pygame, math_utils
 
 
 class Enemy:
-    def __init__(self, who, where,y, left, right, step_delay, step, speedtp):
+    def __init__(self, who, where, y, left, right, step_delay, step, speedtp):
         self.who = who
         self.image1 = self.who
         self.image2 = self.who.replace('1', '2')
@@ -18,7 +18,7 @@ class Enemy:
 
         self.screen = pygame.display.get_surface()
         self.rect = pygame.Rect(where, self.image_finale.get_size())
-        self.rect.center=where
+        self.rect.center = where
 
         self.p = pygame.event.custom_type()
         pygame.time.set_timer(self.p, step_delay)
@@ -36,13 +36,11 @@ class Enemy:
         self.how_many_rotate = 0
         self.let_go_tp = False
         self.speedtp = speedtp
-        self.xy_fly=[]
+        self.xy_fly = []
         self.fly = False
         self.let_go_rotate = True
-        self.where_walk_enemy=self.rect.copy()
-        self.where_walk_enemy.center=[left+0.5*(right-left),y]
-
-
+        self.where_walk_enemy = self.rect.copy()
+        self.where_walk_enemy.center = [left + 0.5 * (right - left), y]
 
     def _a_che(self):
         if self.changed_picture:
@@ -67,16 +65,17 @@ class Enemy:
 
     def go_walk(self):
         self.walk = True
-        self.let_go_rotate=False
+        self.let_go_rotate = False
 
     def sozdowatel_debug(self):
         pygame.draw.rect(self.screen, [255, 255, 255], self.rect, 2)
-        pygame.draw.rect(self.screen, [255,0, 255], self.where_walk_enemy, 2)
+        pygame.draw.rect(self.screen, [255, 0, 255], self.where_walk_enemy, 2)
         pygame.draw.line(self.screen, [255, 0, 255], [self.leftx, self.rect.top], [self.leftx, self.rect.bottom], 2)
         pygame.draw.line(self.screen, [255, 0, 255], [self.rightx, self.rect.top], [self.rightx, self.rect.bottom], 2)
         for a in self.xy_fly:
             if 'x' in a.keys():
-                pygame.draw.circle(self.screen,[255,0,0],[a['x'],a['y']],3)
+                pygame.draw.circle(self.screen, [255, 0, 0], [a['x'], a['y']], 3)
+
     def control(self, event):
         for i in event:
             if i.type == self.p:
@@ -101,8 +100,9 @@ class Enemy:
         elif self.where_walk_enemy.left <= self.leftx and self.speedx < 0:
             self.where_walk_enemy.left = self.leftx
             self.speedx = -self.speedx
+
     def real_walk(self):
-        self.rect.center=self.where_walk_enemy.center
+        self.rect.center = self.where_walk_enemy.center
 
     def start_go_rotate(self, angle):
         self.walk = False
@@ -126,7 +126,7 @@ class Enemy:
         elif int(self.how_many_rotate) > self.angle:
             self._rotate(-1)
         else:
-            self.let_go_rotate=False
+            self.let_go_rotate = False
 
     def go_tp(self, xy):
         self.walk = False
@@ -164,31 +164,34 @@ class Enemy:
 
     def free_fly(self):
         if 'mode' in self.xy_fly[0].keys() and self.xy_fly[0]['mode'] == 'walk':
-            self.xy_fly[0]['x']=self.where_walk_enemy.centerx
+            self.xy_fly[0]['x'] = self.where_walk_enemy.centerx
             self.xy_fly[0]['y'] = self.where_walk_enemy.centery
+
         self.how_many_rotate = self.how_many_rotate % 360
         m = math.dist(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
         u = 360 - math_utils.get_angle_by_point(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
-        if m > self.xy_fly[0]['speed']*2:
+
+        if  not self.rect.collidepoint(self.xy_fly[0]['x'],self.xy_fly[0]['y']):
             self.let_go_rotate = True
             xy_tp = math_utils.get_point_by_angle([*self.rect.center], -self.how_many_rotate, self.xy_fly[0]['speed'])
 
             self.rect.center = xy_tp
-            o=u-360
-            if self.how_many_rotate + abs(self.xy_fly[0]['angle'])*2 >= u and self.how_many_rotate - abs(self.xy_fly[0]['angle']*2)<= u or self.how_many_rotate-abs(self.xy_fly[0]['angle']*2)<=o:
+            o = u - 360
+            if self.how_many_rotate + abs(self.xy_fly[0]['angle']) * 2 >= u and self.how_many_rotate - abs(
+                    self.xy_fly[0]['angle'] * 2) <= u or self.how_many_rotate - abs(self.xy_fly[0]['angle'] * 2) <= o:
                 self.how_many_rotate = u
             else:
                 self.how_many_rotate += self.xy_fly[0]['angle']
 
 
-        elif len(self.xy_fly)>1:
+        elif len(self.xy_fly) > 1:
             del self.xy_fly[0]
 
 
         else:
             self.let_go_rotate = False
             self.fly = False
-            self.walk=True
+            self.walk = True
             print('stop')
         print(self.xy_fly)
         print('------------------------')

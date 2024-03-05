@@ -1,17 +1,29 @@
-import pygame,player,enemy
+import pygame, player, enemy, random
 
-p=player.Player([600,500])
+p = player.Player([600, 500])
+q = []
 
-q=(enemy.Enemy('images/flies/butterfly_red1.png',[500,-40],100,90,300,500,30,1.5),
-enemy.Enemy('images/flies/butterfly_red1.png',[550,-60],100,90,370,500,30,1.5),
-enemy.Enemy('images/flies/butterfly_red1.png',[600,-80],100,90,440,500,30,1.5),
-enemy.Enemy('images/flies/butterfly_red1.png',[650,-100],100,90,510,500,30,1.5),
-enemy.Enemy('images/flies/butterfly_red1.png',[700,-120],100,90,580,500,30,1.5),
-)
-q[0].walk=False
 
-event_for_debug=False
-normal_paint=True
+def sozdovatel(how_many):
+    p = 100
+    for h in range(how_many):
+        y = random.randint(-100, 400)
+        if y < 0:
+            x = random.randint(-100, 1100)
+        else:
+            n = [random.randint(-100, 0), random.randint(1000, 1100)]
+            x = random.choice(n)
+        l = p + 800 / how_many
+        m = enemy.Enemy('images/flies/butterfly_red1.png', [x, y], 100, p, l, 500, 30, 1.5)
+        p = l
+        q.append(m)
+
+sozdovatel(8)
+q[0].walk = False
+
+event_for_debug = False
+normal_paint = True
+
+
 def model():
     pass
-
