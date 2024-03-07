@@ -29,50 +29,61 @@ def comtrol():
                 model.q[a].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
                                   [random.randint(100, 900), random.randint(100, 600)]])
         if e.type == pygame.KEYDOWN and e.key == pygame.K_g:
-            for a in range(len(model.q)):
-                model.q[a].go_free_fly([
-                    {
-                        'x': 50,
-                        'y': 50,
-                        'speed': 4,
-                        'angle': -3
-                    }
-                    ,
-                    {
-                        'x': 150,
-                        'y':400,
-                        'speed':4,
-                        'angle':-3
-                    }
-                    ,
-                    {
-                        'x': 375,
-                        'y': 500,
-                        'speed': 3,
-                        'angle': -1
-                    }
-                    ,
-                    {
-                        'x': 480,
-                        'y': 400,
-                        'speed': 4,
-                        'angle': -1
-                    }
-                    ,
-                    {
-                        'x': 300,
-                        'y': 200,
-                        'speed': 4,
-                        'angle': -5
-                    }
-                    ,
-                    {
-                        'mode': 'walk',
-                        'speed': 4,
-                        'angle': -5
+            a=[
+                {
+                    'x': 50,
+                    'y': 50,
+                    'speed': 3,
+                    'angle': -5
+                }
+                ,
+                {
+                    'x': 150,
+                    'y':400,
+                    'speed':3,
+                    'angle':-5
+                }
+                ,
+                {
+                    'x': 375,
+                    'y': 500,
+                    'speed': 3,
+                    'angle': -5
+                }
+                ,
+                {
+                    'x': 480,
+                    'y': 400,
+                    'speed': 3,
+                    'angle': -5
+                }
+                ,
+                {
+                    'x': 300,
+                    'y': 200,
+                    'speed': 3,
+                    'angle': -5
+                }
+                ,
+                {
+                    'mode': 'walk',
+                    'speed': 3,
+                    'angle': -5
 
-                    }
-                ])
+                }]
+            b=[]
+            for h in range(len(a)):
+                b.append(a[h].copy())
+            for h in range(len(b)):
+                if 'x' in a[h].keys():
+                    b[h]['x']=1000-a[h]['x']
+            for j in range(len(model.q)):
+                if model.q[j].where[0]<500:
+                    model.q[j].go_free_fly(a.copy())
+                else:
+                    model.q[j].go_free_fly(b.copy())
+
+
 
 
 

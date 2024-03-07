@@ -177,8 +177,9 @@ class Enemy:
 
             self.rect.center = xy_tp
             o = u - 360
-            if self.how_many_rotate + abs(self.xy_fly[0]['angle']) * 2 >= u and self.how_many_rotate - abs(
-                    self.xy_fly[0]['angle'] * 2) <= u or self.how_many_rotate - abs(self.xy_fly[0]['angle'] * 2) <= o:
+            if self.how_many_rotate + abs(self.xy_fly[0]['angle']) * 2 >= u \
+                    and self.how_many_rotate - abs(self.xy_fly[0]['angle'] * 2) <= u \
+                    or self.how_many_rotate - abs(self.xy_fly[0]['angle'] * 2) <= o:
                 self.how_many_rotate = u
             else:
                 self.how_many_rotate += self.xy_fly[0]['angle']
