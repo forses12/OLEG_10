@@ -29,19 +29,20 @@ def comtrol():
                 model.q[a].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
                                   [random.randint(100, 900), random.randint(100, 600)]])
         if e.type == pygame.KEYDOWN and e.key == pygame.K_g:
+
             a=[
                 {
                     'x': 50,
                     'y': 50,
                     'speed': 3,
-                    'angle': -5
+                    'angle': 5
                 }
                 ,
                 {
                     'x': 150,
                     'y':400,
                     'speed':3,
-                    'angle':-5
+                    'angle':5
                 }
                 ,
                 {
@@ -77,11 +78,13 @@ def comtrol():
             for h in range(len(b)):
                 if 'x' in a[h].keys():
                     b[h]['x']=1000-a[h]['x']
+                    b[h]['angle']*=-1
             for j in range(len(model.q)):
+
                 if model.q[j].where[0]<500:
-                    model.q[j].go_free_fly(a.copy())
+                    model.q[j].go_free_fly(a.copy(),model.q,j==0)
                 else:
-                    model.q[j].go_free_fly(b.copy())
+                    model.q[j].go_free_fly(b.copy(),model.q,j==0)
 
 
 

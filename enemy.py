@@ -155,12 +155,27 @@ class Enemy:
             self.let_go_tp = False
             self.rect.center = self.xy
 
-    def go_free_fly(self, xy):
+    def spavn(self,f):
+        xy=[self.xy_fly[0]['x'], self.xy_fly[0]['y']]
+        a=math_utils.get_angle_by_point(xy,self.rect.center)
+        m= math.dist(self.rect.center, xy)
+        for d in f:
+            if d is self:
+                continue
+            m+=30
+            g=math_utils.get_point_by_angle(xy,a,m)
+            d.rect.center=g
+
+
+
+    def go_free_fly(self, xy,q,n:False):
         self.fly = True
         self.let_go_rotate = True
         self.walk = False
 
         self.xy_fly = xy
+        if n:
+            q[0].spavn(q)
 
     def free_fly(self):
         if 'mode' in self.xy_fly[0].keys() and self.xy_fly[0]['mode'] == 'walk':
