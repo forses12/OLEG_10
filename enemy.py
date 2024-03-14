@@ -157,14 +157,15 @@ class Enemy:
 
     def spavn(self,f):
         xy=[self.xy_fly[0]['x'], self.xy_fly[0]['y']]
-        a=math_utils.get_angle_by_point(xy,self.rect.center)
+        a=math_utils.get_angle_by_point(xy.copy(),self.rect.center)
         m= math.dist(self.rect.center, xy)
         for d in f:
             if d is self:
                 continue
-            m+=30
-            g=math_utils.get_point_by_angle(xy,a,m)
+            m += 70
+            g=math_utils.get_point_by_angle(xy.copy(),a,m)
             d.rect.center=g
+
 
 
 

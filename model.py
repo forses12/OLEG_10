@@ -19,7 +19,7 @@ def sozdovatel(how_many):
         p = l
         q.append(m)
 
-sozdovatel(8)
+sozdovatel(4)
 q[0].walk = False
 
 
