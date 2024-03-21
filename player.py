@@ -5,7 +5,7 @@ class Player:
     def __init__(self, where):
         self.image = 'images/player/player.png'
         image = pygame.image.load(self.image)
-        size = [15 * 4, 16 * 4]
+        size = [15 * 3, 16 * 3]
         self.image = pygame.transform.scale(image, size)
         self.screen = pygame.display.get_surface()
         self.rect = pygame.Rect(where, size)

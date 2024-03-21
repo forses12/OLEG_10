@@ -2,7 +2,7 @@ import pygame, player, enemy, random
 
 import level
 
-p = player.Player([600, 500])
+p = player.Player([600, 600])
 q = []
 k=level.Level(q)
 

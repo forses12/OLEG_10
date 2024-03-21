@@ -4,15 +4,16 @@ import pygame, math_utils
 
 
 class Enemy:
-    def __init__(self, who, where, y, left, right, step_delay, step, speedtp):
+    def __init__(self, who, where,  how_many_more, y, left, right, step_delay, step, speedtp):
         self.who = who
         self.image1 = self.who
         self.image2 = self.who.replace('1', '2')
         self.where = where
+        self. how_many_more= how_many_more
 
         self.images = pygame.image.load(self.image1)
         self.images1 = pygame.image.load(self.image2)
-        self.size = [self.images.get_width() * 4, self.images.get_height() * 4]
+        self.size = [self.images.get_width() * how_many_more, self.images.get_height() *  how_many_more]
         self.image = pygame.transform.scale(self.images, self.size)
         self.image_finale = pygame.transform.scale(self.images, self.size)
 
@@ -45,10 +46,10 @@ class Enemy:
     def _a_che(self):
         if self.changed_picture:
             image = self.images1
-            self.size = [self.images1.get_width() * 4, self.images1.get_height() * 4]
+            self.size = [self.images1.get_width() * self.how_many_more, self.images1.get_height() * self.how_many_more]
         else:
             image = self.images
-            self.size = [self.images.get_width() * 4, self.images.get_height() * 4]
+            self.size = [self.images.get_width() * self.how_many_more, self.images.get_height() * self.how_many_more]
         self.changed_picture = not self.changed_picture
 
         self._remake_center(self.size)
