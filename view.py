@@ -20,6 +20,7 @@ def view():
     debug(model.p)
     for a in model.q:
         debug(a)
+    debug(model.k)
 
 
     pygame.display.flip()
