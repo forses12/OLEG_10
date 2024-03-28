@@ -143,15 +143,12 @@ class Enemy:
     def _tp(self):
         if (self.tp_speedxy[0] > 0 and self.rect.centerx < self.xy[0]) \
                 or (self.tp_speedxy[0] < 0 and self.rect.centerx > self.xy[0]):
-            print(self.rect.center)
-            print(self.tp_speedxy)
+
             self.tp_rect[0] += self.tp_speedxy[0]
             self.tp_rect[1] += self.tp_speedxy[1]
 
             self.rect.centerx = self.tp_rect[0]
             self.rect.centery = self.tp_rect[1]
-            print(self.rect.center)
-            print('-------------------------------')
         else:
             self.let_go_tp = False
             self.rect.center = self.xy
@@ -170,13 +167,14 @@ class Enemy:
 
 
 
-    def go_free_fly(self, xy,q,n:False):
+    def go_free_fly(self, xy,q):
         self.fly = True
         self.let_go_rotate = True
         self.walk = False
 
         self.xy_fly = xy
-        if n:
+
+        if self is q[0]:
             q[0].spavn(q)
 
     def free_fly(self):
@@ -210,10 +208,7 @@ class Enemy:
             self.let_go_rotate = False
             self.fly = False
             self.walk = True
-            print('stop')
-        print(self.xy_fly)
-        print('------------------------')
-        print(m)
+
         # if self.how_many_rotate!=angle:
         #
         #     self.image_finale=pygame.transform.rotate(self.image, -angle)
