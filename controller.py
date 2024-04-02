@@ -14,10 +14,11 @@ def comtrol():
             model.event_for_debug=not model.event_for_debug
         if e.type==pygame.KEYDOWN and e.key==pygame.K_q:
             model.normal_paint=not model.normal_paint
+        if e.type==pygame.MOUSEBUTTONDOWN:
+            print(e.pos)
+
         if e.type == pygame.KEYDOWN and e.key == pygame.K_a:
-
             model.q[0].go_walk()
-
 
         if e.type==pygame.KEYDOWN and e.key==pygame.K_s:
             model.q[0].start_go_rotate(0)

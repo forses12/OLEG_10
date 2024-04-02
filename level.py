@@ -15,8 +15,8 @@ class Level:
         self.sozdovatel(8, 3, 225, 775, BUTTERFLY_RED1, y=160)
         self.sozdovatel(10, 3, 125, 875, FLY_BLUE1, y=210)
         self.sozdovatel(10, 3, 125, 875, FLY_BLUE1, y=260)
-        self.list = [{'rects': [pygame.rect.Rect([100, 100], [400, 400]),
-                                pygame.rect.Rect([400, 200], [600, 500])],
+        self.list = [{'rects': [pygame.rect.Rect([440, 100], [110, 70]),
+                                ],
                       'enemys': [],
                       'time_sleep': 1,
                       'points': [{
@@ -63,8 +63,204 @@ class Level:
                       ]
                       }
             ,
-                     {'rects': [pygame.rect.Rect([100, 200], [200, 344]),
-                                pygame.rect.Rect([300, 400], [150, 500])],
+                     {'rects': [pygame.rect.Rect([422, 200], [140, 70])],
+
+                      'enemys': [],
+                      'time_sleep': 1,
+                      'points': [{
+                          'x': 50,
+                          'y': 50,
+                          'speed': 3,
+                          'angle': 5
+                      }
+                          ,
+                          {
+                              'x': 150,
+                              'y': 400,
+                              'speed': 3,
+                              'angle': 5
+                          }
+                          ,
+                          {
+                              'x': 375,
+                              'y': 500,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'x': 480,
+                              'y': 400,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'x': 500,
+                              'y': 200,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'mode': 'walk',
+                              'speed': 3,
+                              'angle': -5
+
+                          }
+                      ]
+                      }
+            ,
+                     {'rects': [pygame.rect.Rect([360,30], [250, 60]),
+                                pygame.rect.Rect([360,100], [60, 70]),
+                                pygame.rect.Rect([560,100], [60, 70])],
+
+                      'enemys': [],
+                      'time_sleep': 1,
+                      'points': [{
+                          'x': 50,
+                          'y': 50,
+                          'speed': 3,
+                          'angle': 5
+                      }
+                          ,
+                          {
+                              'x': 150,
+                              'y': 400,
+                              'speed': 3,
+                              'angle': 5
+                          }
+                          ,
+                          {
+                              'x': 375,
+                              'y': 500,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'x': 480,
+                              'y': 400,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'x': 500,
+                              'y': 200,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'mode': 'walk',
+                              'speed': 3,
+                              'angle': -5
+
+                          }
+                      ]
+                      }
+            ,
+                     {'rects': [pygame.rect.Rect([220, 100], [120, 70]),
+                                pygame.rect.Rect([625, 100], [120, 70])],
+
+                      'enemys': [],
+                      'time_sleep': 1,
+                      'points': [{
+                          'x': 50,
+                          'y': 50,
+                          'speed': 3,
+                          'angle': 5
+                      }
+                          ,
+                          {
+                              'x': 150,
+                              'y': 400,
+                              'speed': 3,
+                              'angle': 5
+                          }
+                          ,
+                          {
+                              'x': 375,
+                              'y': 500,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'x': 480,
+                              'y': 400,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'x': 500,
+                              'y': 200,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'mode': 'walk',
+                              'speed': 3,
+                              'angle': -5
+
+                          }
+                      ]
+                      }
+            ,
+                     {'rects': [pygame.rect.Rect([270, 200], [120, 70]),
+                                pygame.rect.Rect([570, 200], [120, 70])],
+
+                      'enemys': [],
+                      'time_sleep': 1,
+                      'points': [{
+                          'x': 50,
+                          'y': 50,
+                          'speed': 3,
+                          'angle': 5
+                      }
+                          ,
+                          {
+                              'x': 150,
+                              'y': 400,
+                              'speed': 3,
+                              'angle': 5
+                          }
+                          ,
+                          {
+                              'x': 375,
+                              'y': 500,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'x': 480,
+                              'y': 400,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'x': 500,
+                              'y': 200,
+                              'speed': 3,
+                              'angle': -5
+                          }
+                          ,
+                          {
+                              'mode': 'walk',
+                              'speed': 3,
+                              'angle': -5
+
+                          }
+                      ]
+                      }
+            ,
+                     {'rects': [pygame.rect.Rect([120, 200], [120, 70]),
+                                pygame.rect.Rect([720, 200], [120, 70])],
 
                       'enemys': [],
                       'time_sleep': 1,
@@ -136,5 +332,6 @@ class Level:
                 for j in n['rects']:
                     if j.collidepoint(h.where_walk_enemy.center):
                         n['enemys'].append(h)
-                        print(n['enemys'])
+
+
 
