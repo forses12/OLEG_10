@@ -66,7 +66,7 @@ class Level:
                      {'rects': [pygame.rect.Rect([422, 200], [140, 70])],
 
                       'enemys': [],
-                      'time_sleep': 1,
+                      'time_sleep': 2,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -116,7 +116,7 @@ class Level:
                                 pygame.rect.Rect([560,100], [60, 70])],
 
                       'enemys': [],
-                      'time_sleep': 1,
+                      'time_sleep': 3,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -165,7 +165,7 @@ class Level:
                                 pygame.rect.Rect([625, 100], [120, 70])],
 
                       'enemys': [],
-                      'time_sleep': 1,
+                      'time_sleep': 4,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -214,7 +214,7 @@ class Level:
                                 pygame.rect.Rect([570, 200], [120, 70])],
 
                       'enemys': [],
-                      'time_sleep': 1,
+                      'time_sleep': 6,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -263,7 +263,7 @@ class Level:
                                 pygame.rect.Rect([720, 200], [120, 70])],
 
                       'enemys': [],
-                      'time_sleep': 1,
+                      'time_sleep':9 ,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -308,6 +308,7 @@ class Level:
                       ]
                       }
                      ]
+        self.zapusk()
         self.rects_team()
 
     def sozdovatel(self, how_many, how_many_more, left_border, right_border, p, y=60):
@@ -332,6 +333,18 @@ class Level:
                 for j in n['rects']:
                     if j.collidepoint(h.where_walk_enemy.center):
                         n['enemys'].append(h)
+    def zapusk(self):
+        for q in self.list:
+            q['go_sleep'] = pygame.event.custom_type()
+            pygame.time.set_timer(q['go_sleep'], q['time_sleep']*1000,1)
+    def controller(self,event):
+        for h in self.list:
+            for u in event:
+                if h['go_sleep']==u.type:
+                    for l in h['enemys']:
+                        l.go_free_fly(h['points'].copy(),h['enemys'])
+
+
 
 
 

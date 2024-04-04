@@ -4,6 +4,7 @@ def comtrol():
 
     event=pygame.event.get()
     model.p.control(event)
+    model.k.controller(event)
     for a in model.q:
         a.control(event)
 
@@ -29,10 +30,7 @@ def comtrol():
             for a in range(len(model.q)):
                 model.q[a].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
                                   [random.randint(100, 900), random.randint(100, 600)]])
-        if e.type == pygame.KEYDOWN and e.key == pygame.K_g:
-            for h in model.k.list:
-                for l in h['enemys']:
-                    l.go_free_fly(h['points'],h['enemys'])
+
 
 
 
