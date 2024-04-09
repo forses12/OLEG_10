@@ -13,7 +13,7 @@ class Player:
     def sozdowatel(self):
         self.screen.blit(self.image, self.rect)
 
-    def sozdowatel_debug(self):
+    def scozdowatel_debug(self):
         pygame.draw.rect(self.screen, [255, 255, 255], self.rect, 2)
 
     def control(self, event):

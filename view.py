@@ -15,12 +15,14 @@ def view():
         model.p.sozdowatel()
         for a in model.q:
             a.sozdowatel()
+        model.h.sozdovatel()
 
 
     debug(model.p)
     for a in model.q:
         debug(a)
     debug(model.k)
+
 
 
     pygame.display.flip()

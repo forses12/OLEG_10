@@ -18,6 +18,7 @@ def comtrol():
         if e.type==pygame.MOUSEBUTTONDOWN:
             print(e.pos)
 
+
         if e.type == pygame.KEYDOWN and e.key == pygame.K_a:
             model.q[0].go_walk()
 
@@ -30,7 +31,6 @@ def comtrol():
             for a in range(len(model.q)):
                 model.q[a].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
                                   [random.randint(100, 900), random.randint(100, 600)]])
-
 
 
 
