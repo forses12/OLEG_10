@@ -1,4 +1,4 @@
-import pygame, model,random
+import pygame, model,random,bullet
 
 def comtrol():
 
@@ -16,7 +16,8 @@ def comtrol():
         if e.type==pygame.KEYDOWN and e.key==pygame.K_q:
             model.normal_paint=not model.normal_paint
         if e.type==pygame.MOUSEBUTTONDOWN:
-            print(e.pos)
+
+            model.h.append(bullet.Bullet(model.q, model.p,model.h))
 
 
         if e.type == pygame.KEYDOWN and e.key == pygame.K_a:

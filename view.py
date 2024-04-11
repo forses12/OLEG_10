@@ -15,7 +15,9 @@ def view():
         model.p.sozdowatel()
         for a in model.q:
             a.sozdowatel()
-        model.h.sozdovatel()
+        for m in model.h:
+            m.sozdovatel()
+
 
 
     debug(model.p)
