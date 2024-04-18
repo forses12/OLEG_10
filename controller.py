@@ -9,6 +9,7 @@ def comtrol():
     event=pygame.event.get()
     model.p.control(event)
     model.k.controller(event)
+    model.s.control(event)
 
     for a in model.q:
         a.control(event)

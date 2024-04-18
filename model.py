@@ -1,11 +1,12 @@
 import pygame, player, enemy, random
 
-import level,bullet
+import level,bullet,kaboom
 
 p = player.Player([600, 600])
 q = []
 k=level.Level(q)
 h=[]
+s=kaboom.Kaboom()
 
 
 event_for_debug = False
