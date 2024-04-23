@@ -6,9 +6,7 @@ p = player.Player([600, 600])
 q = []
 k=level.Level(q)
 h=[]
-s=kaboom.Kaboom()
-
-
+s=[]
 event_for_debug = False
 normal_paint = True
 
@@ -16,6 +14,11 @@ normal_paint = True
 def model():
     print(len(h))
     for x in h.copy():
-        x.free_fly()
+        b=x.free_fly()
         if x.where[1]<0:
             h.remove(x)
+        if b is not None:
+            j = kaboom.Kaboom(b)
+            s.append(j)
+
+

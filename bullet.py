@@ -13,17 +13,19 @@ class Bullet():
         self.h=bullets
         self.where=[self.player.rect.centerx-image1.get_width()/2-2,self.player.rect.centery-1]
 
-
     def sozdovatel(self):
         self.screen.blit(image,self.where)
     def free_fly(self):
         self.where[1]-=2
-        self.boom()
+        return self.boom()
     def boom(self):
         for k in self.enemys.copy():
             if k.rect.collidepoint(self.where):
                 self.enemys.remove(k)
                 self.h.remove(self)
+                return self.where
+
+
 
 
 

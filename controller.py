@@ -9,10 +9,10 @@ def comtrol():
     event=pygame.event.get()
     model.p.control(event)
     model.k.controller(event)
-    model.s.control(event)
-
     for a in model.q:
         a.control(event)
+    for s in model.s:
+        s.control(event)
     print(pygame.mouse.get_pressed())
     if pygame.mouse.get_pressed()[0] and you_can:
         model.h.append(bullet.Bullet(model.q, model.p, model.h))

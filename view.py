@@ -13,11 +13,12 @@ def view():
     screen.fill([0, 0, 0])
     if model.normal_paint:
         model.p.sozdowatel()
-        model.s.sozdowatel()
         for a in model.q:
             a.sozdowatel()
         for m in model.h:
             m.sozdovatel()
+        for s in model.s:
+            s.sozdowatel()
 
 
 
