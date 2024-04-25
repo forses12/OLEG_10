@@ -1,6 +1,6 @@
 import math
 
-import pygame, math_utils
+import pygame, math_utils, random
 
 
 class Enemy:
@@ -167,14 +167,14 @@ class Enemy:
 
 
 
-    def go_free_fly(self, xy,q):
+    def go_free_fly(self, xy,q=None):
         self.fly = True
         self.let_go_rotate = True
         self.walk = False
 
         self.xy_fly = xy
 
-        if self is q[0]:
+        if q is not None and self is q[0]:
             q[0].spavn(q)
 
     def free_fly(self):
@@ -208,6 +208,54 @@ class Enemy:
             self.let_go_rotate = False
             self.fly = False
             self.walk = True
+
+    def attack(self,player):
+        self.go_free_fly(self._math_attack(player))
+    def _math_attack(self,player):
+
+        points= [{
+            'speed': 3,
+            'angle': 5
+        }
+            ,
+            {
+                'speed': 3,
+                'angle': 5
+            }
+            ,
+            {
+                'speed': 3,
+                'angle': -5
+            }
+            ,
+            {
+                'speed': 3,
+                'angle': -5
+            }
+            ,
+            {
+                'mode': 'walk',
+                'speed': 3,
+                'angle': -5
+
+            }
+        ]
+        step_y=(600-self.rect.centery)/5
+        for j in range(len(points)):
+            if j==0:
+                random_x=random.randint(self.rect.centerx-200,self.rect.centerx+200)
+                points[j]['x']=random_x
+                points[j]['y'] = self.rect.centery + step_y * (j + 1)
+            elif 'mode' not in points[j] and j!=3:
+                random_x=random.randint(points[j-1]['x']-200,points[j-1]['x']+200)
+                points[j]['x'] = random_x
+                points[j]['y'] = self.rect.centery + step_y * (j + 1)
+            elif j==3:
+                points[j]['x'] = player.rect.centerx
+                points[j]['y'] = player.rect.centery
+
+        return points
+
 
         # if self.how_many_rotate!=angle:
         #
