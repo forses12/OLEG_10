@@ -178,6 +178,8 @@ class Enemy:
             q[0].spavn(q)
 
     def free_fly(self):
+        if self.rect.top >= 700:
+            self.rect.bottom = 0
         if 'mode' in self.xy_fly[0].keys() and self.xy_fly[0]['mode'] == 'walk':
             self.xy_fly[0]['x'] = self.where_walk_enemy.centerx
             self.xy_fly[0]['y'] = self.where_walk_enemy.centery
@@ -205,9 +207,10 @@ class Enemy:
 
 
         else:
-            self.let_go_rotate = False
+
             self.fly = False
             self.walk = True
+            self.let_go_rotate= True
 
     def attack(self,player):
         self.go_free_fly(self._math_attack(player))
@@ -234,6 +237,11 @@ class Enemy:
             }
             ,
             {
+                'speed': 3,
+                'angle': -5
+            }
+            ,
+            {
                 'mode': 'walk',
                 'speed': 3,
                 'angle': -5
@@ -246,13 +254,20 @@ class Enemy:
                 random_x=random.randint(self.rect.centerx-200,self.rect.centerx+200)
                 points[j]['x']=random_x
                 points[j]['y'] = self.rect.centery + step_y * (j + 1)
-            elif 'mode' not in points[j] and j!=3:
+
+
+            elif 'mode' not in points[j] and j!=3 and j!=4:
                 random_x=random.randint(points[j-1]['x']-200,points[j-1]['x']+200)
                 points[j]['x'] = random_x
                 points[j]['y'] = self.rect.centery + step_y * (j + 1)
             elif j==3:
                 points[j]['x'] = player.rect.centerx
                 points[j]['y'] = player.rect.centery
+            elif j==4:
+                points[j]['x'] = points[j-1]['x']
+                points[j]['y'] = 700+self.rect.size[1]/2
+
+
 
         return points
 

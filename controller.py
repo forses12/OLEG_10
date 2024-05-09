@@ -3,6 +3,8 @@ import pygame, model,random,bullet
 p = pygame.event.custom_type()
 
 you_can=True
+h= pygame.event.custom_type()
+pygame.time.set_timer(h, 1000)
 def comtrol():
     global you_can
 
@@ -40,9 +42,10 @@ def comtrol():
             model.q[0].start_go_rotate(0)
 
         if e.type==pygame.KEYDOWN and e.key==pygame.K_d:
+
             model.q[0].start_go_rotate(111)
-        if e.type == pygame.KEYDOWN and e.key == pygame.K_b:
-            model.q[0].attack(model.p)
+        if e.type == h:
+            model.q[random.randint(0,len(model.q)-1)].attack(model.p)
         if e.type==pygame.KEYDOWN and e.key==pygame.K_SPACE:
             for a in range(len(model.q)):
                 model.q[a].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
