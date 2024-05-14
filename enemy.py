@@ -167,13 +167,13 @@ class Enemy:
 
 
 
-    def go_free_fly(self, xy,q=None):
+    def go_free_fly(self, xy,q=None,fly_finish_callback=None):
         self.fly = True
         self.let_go_rotate = True
         self.walk = False
 
         self.xy_fly = xy
-
+        self.fly_finish_callback=fly_finish_callback
         if q is not None and self is q[0]:
             q[0].spavn(q)
 
@@ -211,6 +211,8 @@ class Enemy:
             self.fly = False
             self.walk = True
             self.let_go_rotate= True
+            if callable(self.fly_finish_callback):
+                self.fly_finish_callback()
 
     def attack(self,player):
         self.go_free_fly(self._math_attack(player))

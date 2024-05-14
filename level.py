@@ -337,13 +337,20 @@ class Level:
         for q in self.list:
             q['go_sleep'] = pygame.event.custom_type()
             pygame.time.set_timer(q['go_sleep'], q['time_sleep']*1000,1)
-    def controller(self,event):
+    def controller(self,event,fly_finish_callback):
+        for u in event:
+            h=self.finder(u)
+            if None is h:
+                continue
+            for l in h['enemys']:
+                if l==self.list[-1]['enemys'][-1]:
+                    l.go_free_fly(h['points'].copy(), h['enemys'],fly_finish_callback)
+                else:
+                    l.go_free_fly(h['points'].copy(),h['enemys'])
+    def finder(self,u):
         for h in self.list:
-            for u in event:
-                if h['go_sleep']==u.type:
-                    for l in h['enemys']:
-                        l.go_free_fly(h['points'].copy(),h['enemys'])
-
+            if h['go_sleep'] == u.type:
+                return h
 
 
 

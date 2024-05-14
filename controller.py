@@ -4,13 +4,15 @@ p = pygame.event.custom_type()
 
 you_can=True
 h= pygame.event.custom_type()
-pygame.time.set_timer(h, 1000)
+def start_timer_attack():
+    pygame.time.set_timer(h, 1000)
+
 def comtrol():
     global you_can
 
     event=pygame.event.get()
     model.p.control(event)
-    model.k.controller(event)
+    model.k.controller(event,start_timer_attack)
     for a in model.q:
         a.control(event)
     for s in model.s:
@@ -44,7 +46,7 @@ def comtrol():
         if e.type==pygame.KEYDOWN and e.key==pygame.K_d:
 
             model.q[0].start_go_rotate(111)
-        if e.type == h:
+        if  e.type == h:
             model.q[random.randint(0,len(model.q)-1)].attack(model.p)
         if e.type==pygame.KEYDOWN and e.key==pygame.K_SPACE:
             for a in range(len(model.q)):
