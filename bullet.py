@@ -16,7 +16,7 @@ class Bullet():
     def sozdovatel(self):
         self.screen.blit(image,self.where)
     def free_fly(self):
-        self.where[1]-=2
+        self.where[1]-=5
         return self.boom()
     def boom(self):
         for k in self.enemys.copy():

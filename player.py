@@ -2,7 +2,7 @@ import pygame
 
 
 class Player:
-    def __init__(self, where):
+    def __init__(self, where,enemys):
         self.image = 'images/player/player.png'
         image = pygame.image.load(self.image)
         size = [15 * 3, 16 * 3]
@@ -11,6 +11,7 @@ class Player:
         self.rect = pygame.Rect(where, size)
 
     def sozdowatel(self):
+
         self.screen.blit(self.image, self.rect)
 
     def sozdowatel_debug(self):

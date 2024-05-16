@@ -2,8 +2,8 @@ import pygame, player, enemy, random
 
 import level,bullet,kaboom
 
-p = player.Player([600, 600])
 q = []
+p = player.Player([600, 600],q)
 k=level.Level(q)
 h=[]
 s=[]
@@ -12,7 +12,7 @@ normal_paint = True
 
 
 def model():
-    print(len(h))
+
     for x in h.copy():
         b=x.free_fly()
         if x.where[1]<0:
