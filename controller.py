@@ -55,7 +55,7 @@ def comtrol():
         if e.type==pygame.KEYDOWN and e.key==pygame.K_d:
 
             model.q[0].start_go_rotate(111)
-        if  e.type == h and len(model.q)>0 and can_attack(10):
+        if  e.type == h and len(model.q)>0 and can_attack(1):
             model.q[random.randint(0,len(model.q)-1)].attack(model.p)
         if e.type==pygame.KEYDOWN and e.key==pygame.K_SPACE:
             for a in range(len(model.q)):

@@ -66,7 +66,7 @@ class Level:
                      {'rects': [pygame.rect.Rect([422, 200], [140, 70])],
 
                       'enemys': [],
-                      'time_sleep': 2,
+                      'time_sleep': 7,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -116,7 +116,7 @@ class Level:
                                 pygame.rect.Rect([560,100], [60, 70])],
 
                       'enemys': [],
-                      'time_sleep': 3,
+                      'time_sleep': 7,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -165,7 +165,7 @@ class Level:
                                 pygame.rect.Rect([625, 100], [120, 70])],
 
                       'enemys': [],
-                      'time_sleep': 4,
+                      'time_sleep': 7,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -214,7 +214,7 @@ class Level:
                                 pygame.rect.Rect([570, 200], [120, 70])],
 
                       'enemys': [],
-                      'time_sleep': 6,
+                      'time_sleep': 7,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -263,7 +263,7 @@ class Level:
                                 pygame.rect.Rect([720, 200], [120, 70])],
 
                       'enemys': [],
-                      'time_sleep':9 ,
+                      'time_sleep':7 ,
                       'points': [{
                           'x': 50,
                           'y': 50,
@@ -343,11 +343,11 @@ class Level:
             if None is h:
                 continue
             for l in h['enemys']:
-                if l==self.list[-1]['enemys'][-1]:
                     l.go_free_fly(h['points'].copy(), h['enemys'],fly_finish_callback)
-                else:
-                    l.go_free_fly(h['points'].copy(),h['enemys'])
     def finder(self,u):
+        """
+        возврашяет словарь с наступившим таймером
+        """
         for h in self.list:
             if h['go_sleep'] == u.type:
                 return h
