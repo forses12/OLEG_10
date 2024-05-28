@@ -5,7 +5,8 @@ p = pygame.event.custom_type()
 you_can=True
 h= pygame.event.custom_type()
 def start_timer_attack():
-    pygame.time.set_timer(h, 100)
+    if can_attack(1):
+        pygame.time.set_timer(h, 1000)
 def can_attack(lm):
     l=0
     for k in model.q:

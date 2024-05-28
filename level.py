@@ -337,13 +337,15 @@ class Level:
         for q in self.list:
             q['go_sleep'] = pygame.event.custom_type()
             pygame.time.set_timer(q['go_sleep'], q['time_sleep']*1000,1)
-    def controller(self,event,fly_finish_callback):
+
+    def controller(self,event,start_timer_attack_callback):
         for u in event:
             h=self.finder(u)
             if None is h:
                 continue
             for l in h['enemys']:
-                    l.go_free_fly(h['points'].copy(), h['enemys'],fly_finish_callback)
+                    l.go_free_fly(h['points'].copy(), h['enemys'],start_timer_attack_callback)
+
     def finder(self,u):
         """
         возврашяет словарь с наступившим таймером
