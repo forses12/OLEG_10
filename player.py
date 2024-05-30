@@ -2,10 +2,11 @@ import pygame
 
 
 class Player:
-    def __init__(self, where,enemies):
+    def __init__(self, where,enemies, kaboom_callback):
         self.image = 'images/player/player.png'
         image = pygame.image.load(self.image)
         size = [15 * 3, 16 * 3]
+        self.kaboom_callback=kaboom_callback
         self.enemies=enemies
         self.image = pygame.transform.scale(image, size)
         self.screen = pygame.display.get_surface()
@@ -26,7 +27,11 @@ class Player:
                 self.rect.centerx = e.pos[0]
     def hit(self):
         for enemy in self.enemies:
-            if enemy.rect.collidepoint(self.rect.topleft):
+            if enemy.rect.collidepoint(self.rect.center):
                 self.alive=False
+                self.kaboom_callback()
+
+
+
 
 

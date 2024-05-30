@@ -4,12 +4,13 @@ import pygame, math_utils, enemy, random
 BIG_GREEN1 = 'big_green1.png'
 BUTTERFLY_RED1 = 'butterfly_red1.png'
 FLY_BLUE1 = 'fly_blue1.png'
-
+h= pygame.event.custom_type()
 
 class Level:
-    def __init__(self, q):
+    def __init__(self, q,p):
         self.screen = pygame.display.get_surface()
         self.q = q
+        self.p=p
         self.sozdovatel(4, 3, 375, 625, BIG_GREEN1)
         self.sozdovatel(8, 3, 225, 775, BUTTERFLY_RED1, y=110)
         self.sozdovatel(8, 3, 225, 775, BUTTERFLY_RED1, y=160)
@@ -311,6 +312,18 @@ class Level:
         self.zapusk()
         self.rects_team()
 
+    def start_timer_attack(self):
+        if self.can_attack(1):
+            pygame.time.set_timer(h, 1000)
+
+    def can_attack(self,lm):
+        l = 0
+        for k in self.q:
+            if k.fly:
+                l += 1
+                if l >= lm:
+                    return False
+        return True
     def sozdovatel(self, how_many, how_many_more, left_border, right_border, p, y=60):
         f = (right_border - left_border) / how_many
 
@@ -338,13 +351,15 @@ class Level:
             q['go_sleep'] = pygame.event.custom_type()
             pygame.time.set_timer(q['go_sleep'], q['time_sleep']*1000,1)
 
-    def controller(self,event,start_timer_attack_callback):
+    def controller(self,event):
         for u in event:
-            h=self.finder(u)
-            if None is h:
+            if u.type == h and len(self.q) > 0 and self.can_attack(1):
+                self.q[random.randint(0, len(self.q) - 1)].attack(self.p)
+            v=self.finder(u)
+            if None is v:
                 continue
-            for l in h['enemys']:
-                    l.go_free_fly(h['points'].copy(), h['enemys'],start_timer_attack_callback)
+            for l in v['enemys']:
+                l.go_free_fly(v['points'].copy(), v['enemys'],self.start_timer_attack)
 
     def finder(self,u):
         """

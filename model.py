@@ -1,12 +1,16 @@
 import pygame, player, enemy, random
 
-import level,bullet,kaboom
+import level,bullet,kaboom,kaboom_player
+def it_rip():
+    s.append(kaboom_player.Kaboom_player(p))
+
+
 
 q = []
-p = player.Player([600, 600],q)
-k=level.Level(q)
 h=[]
 s=[]
+p = player.Player([600, 600],q,it_rip)
+k=level.Level(q,p)
 event_for_debug = False
 normal_paint = True
 
