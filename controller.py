@@ -1,4 +1,6 @@
-import pygame, model,random,bullet
+import pygame, model,random,bullet,enemy_bullet
+
+import enemy_bullet
 
 p = pygame.event.custom_type()
 
@@ -46,9 +48,8 @@ def comtrol():
 
             model.q[0].start_go_rotate(111)
         if e.type==pygame.KEYDOWN and e.key==pygame.K_SPACE:
-            for a in range(len(model.q)):
-                model.q[a].lot_of_tp([[random.randint(100,900),random.randint(100,600)],
-                                  [random.randint(100, 900), random.randint(100, 600)]])
+            k=enemy_bullet.Enemy_bullet(model.q,model.q[7],model.h)
+            model.h.append(k)
 
 
 

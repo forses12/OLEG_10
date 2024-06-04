@@ -11,12 +11,14 @@ class Bullet():
         self.player=player
         self.screen=pygame.display.get_surface()
         self.h=bullets
+        self.image=image
         self.where=[self.player.rect.centerx-image1.get_width()/2-2,self.player.rect.centery-1]
-
+        self.speed_xy=[2,-5]
     def sozdovatel(self):
-        self.screen.blit(image,self.where)
+        self.screen.blit(self.image,self.where)
     def free_fly(self):
-        self.where[1]-=5
+        self.where[0]+=self.speed_xy[0]
+        self.where[1]+=self.speed_xy[1]
         return self.boom()
     def boom(self):
         for k in self.enemys.copy():
