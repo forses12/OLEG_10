@@ -22,7 +22,11 @@ def model():
         if x.where[1]<0:
             h.remove(x)
         if b is not None:
-            j = kaboom.Kaboom(b)
+            if type(x) is bullet.Bullet:
+                j = kaboom.Kaboom(b)
+            else:
+                j = kaboom_player.Kaboom_player(p)
             s.append(j)
+
 
 

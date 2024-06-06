@@ -48,7 +48,7 @@ def comtrol():
 
             model.q[0].start_go_rotate(111)
         if e.type==pygame.KEYDOWN and e.key==pygame.K_SPACE:
-            k=enemy_bullet.Enemy_bullet(model.q,model.q[7],model.h)
+            k=enemy_bullet.Enemy_bullet(model.p,model.q[7],model.h)
             model.h.append(k)
 
 
