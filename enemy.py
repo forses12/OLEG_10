@@ -42,7 +42,7 @@ class Enemy:
         self.let_go_rotate = True
         self.where_walk_enemy = self.rect.copy()
         self.where_walk_enemy.center = [left + 0.5 * (right - left), y]
-
+        self.shot_callback=None
     def _a_che(self):
         if self.changed_picture:
             image = self.images1
@@ -187,7 +187,8 @@ class Enemy:
         self.how_many_rotate = self.how_many_rotate % 360
         m = math.dist(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
         u = 360 - math_utils.get_angle_by_point(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
-
+        if callable(self.shot_callback) and len(self.xy_fly)==3:
+            self.shot_callback()
         if  not self.rect.collidepoint(self.xy_fly[0]['x'],self.xy_fly[0]['y']):
             self.let_go_rotate = True
             xy_tp = math_utils.get_point_by_angle([*self.rect.center], -self.how_many_rotate, self.xy_fly[0]['speed'])
@@ -214,8 +215,10 @@ class Enemy:
             if callable(self.fly_finish_callback):
                 self.fly_finish_callback()
 
-    def attack(self,player):
+    def attack(self,player,shot_callback=None):
         self.go_free_fly(self._math_attack(player))
+        self.shot_callback=shot_callback
+
     def _math_attack(self,player):
 
         points= [{

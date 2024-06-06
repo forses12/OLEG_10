@@ -10,7 +10,7 @@ q = []
 h=[]
 s=[]
 p = player.Player([600, 600],q,it_rip)
-k=level.Level(q,p)
+k=level.Level(q,p,h)
 event_for_debug = False
 normal_paint = True
 

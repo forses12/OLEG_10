@@ -1,5 +1,5 @@
 import math
-import pygame, math_utils, enemy, random
+import pygame, math_utils, enemy, random, enemy_bullet
 
 BIG_GREEN1 = 'big_green1.png'
 BUTTERFLY_RED1 = 'butterfly_red1.png'
@@ -7,9 +7,10 @@ FLY_BLUE1 = 'fly_blue1.png'
 h= pygame.event.custom_type()
 
 class Level:
-    def __init__(self, q,p):
+    def __init__(self, q,p,h):
         self.screen = pygame.display.get_surface()
         self.q = q
+        self.h=h
         self.p=p
         self.sozdovatel(4, 3, 375, 625, BIG_GREEN1)
         self.sozdovatel(8, 3, 225, 775, BUTTERFLY_RED1, y=110)
@@ -354,7 +355,8 @@ class Level:
     def controller(self,event):
         for u in event:
             if u.type == h and len(self.q) > 0 and self.can_attack(1):
-                self.q[random.randint(0, len(self.q) - 1)].attack(self.p)
+                random1=random.randint(0, len(self.q) - 1)
+                self.q[random1].attack(self.p,enemy_bullet.Enemy_bullet)
             v=self.finder(u)
             if None is v:
                 continue
