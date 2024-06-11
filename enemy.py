@@ -188,7 +188,8 @@ class Enemy:
         m = math.dist(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
         u = 360 - math_utils.get_angle_by_point(self.rect.center, [self.xy_fly[0]['x'], self.xy_fly[0]['y']])
         if callable(self.shot_callback) and len(self.xy_fly)==3:
-            self.shot_callback()
+            self.shot_callback(self)
+            self.shot_callback=None
         if  not self.rect.collidepoint(self.xy_fly[0]['x'],self.xy_fly[0]['y']):
             self.let_go_rotate = True
             xy_tp = math_utils.get_point_by_angle([*self.rect.center], -self.how_many_rotate, self.xy_fly[0]['speed'])

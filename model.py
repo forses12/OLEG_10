@@ -19,7 +19,7 @@ def model():
 
     for x in h.copy():
         b=x.free_fly()
-        if x.where[1]<0:
+        if (x.where[1]<0 or x.where[1]>1000)and x in h:
             h.remove(x)
         if b is not None:
             if type(x) is bullet.Bullet:

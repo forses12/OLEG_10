@@ -12,6 +12,7 @@ class Level:
         self.q = q
         self.h=h
         self.p=p
+        self.v=3
         self.sozdovatel(4, 3, 375, 625, BIG_GREEN1)
         self.sozdovatel(8, 3, 225, 775, BUTTERFLY_RED1, y=110)
         self.sozdovatel(8, 3, 225, 775, BUTTERFLY_RED1, y=160)
@@ -356,7 +357,10 @@ class Level:
         for u in event:
             if u.type == h and len(self.q) > 0 and self.can_attack(1):
                 random1=random.randint(0, len(self.q) - 1)
-                self.q[random1].attack(self.p,enemy_bullet.Enemy_bullet)
+                d=random.randint(1,self.v)
+                self.v=self.v-1 if d!=1 else self.v+1
+                a=self.enemy_callback if d==1 else None
+                self.q[random1].attack(self.p,a )
             v=self.finder(u)
             if None is v:
                 continue
@@ -370,6 +374,10 @@ class Level:
         for h in self.list:
             if h['go_sleep'] == u.type:
                 return h
+    def enemy_callback(self,enemy):
+        k=enemy_bullet.Enemy_bullet(self.p,enemy,self.h)
+        self.h.append(k)
+        print(len(self.h))
 
 
 

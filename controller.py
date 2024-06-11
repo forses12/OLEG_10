@@ -22,7 +22,7 @@ def comtrol():
     if pygame.mouse.get_pressed()[0] and you_can:
         model.h.append(bullet.Bullet(model.q, model.p, model.h))
         you_can = False
-        pygame.time.set_timer(p, 1, 1)
+        pygame.time.set_timer(p, 300, 1)
     for e in event.copy():
         if e.type == p:
             you_can=True

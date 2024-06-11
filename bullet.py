@@ -13,7 +13,7 @@ class Bullet():
         self.h=bullets
         self.image=image
         self.where=[self.player.rect.centerx-image1.get_width()/2-2,self.player.rect.centery-1]
-        self.speed_xy=[2,-5]
+        self.speed_xy=[0,-5]
     def sozdovatel(self):
         self.screen.blit(self.image,self.where)
     def free_fly(self):
