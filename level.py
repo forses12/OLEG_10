@@ -314,6 +314,7 @@ class Level:
         self.zapusk()
         self.rects_team()
 
+
     def start_timer_attack(self):
         if self.can_attack(1):
             pygame.time.set_timer(h, 1000)
@@ -355,7 +356,7 @@ class Level:
 
     def controller(self,event):
         for u in event:
-            if u.type == h and len(self.q) > 0 and self.can_attack(1):
+            if u.type == h and len(self.q) > 0 and self.can_attack(4):
                 random1=random.randint(0, len(self.q) - 1)
                 d=random.randint(1,self.v)
                 self.v=self.v-1 if d!=1 else self.v+1
