@@ -9,13 +9,15 @@ def it_rip():
 q = []
 h=[]
 s=[]
-p = player.Player([600, 600],q,it_rip)
+p = player.Player([600, 600],q)
+p.register_me(player.CODE_DEAD,it_rip)
 k=level.Level(q,p,h)
 event_for_debug = False
 normal_paint = True
 
 
 def model():
+    p.model()
 
     for x in h.copy():
         b=x.free_fly()

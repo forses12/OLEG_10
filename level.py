@@ -1,5 +1,7 @@
 import math
-import pygame, math_utils, enemy, random, enemy_bullet
+import pygame, math_utils, enemy, random, enemy_bullet,observer
+
+import player
 
 BIG_GREEN1 = 'big_green1.png'
 BUTTERFLY_RED1 = 'butterfly_red1.png'
@@ -313,6 +315,10 @@ class Level:
                      ]
         self.zapusk()
         self.rects_team()
+        self.lunch_break=False
+        # self.p.alive_callback=self.callback_for_break
+        p.register_me(player.CODE_DEAD,self.callback_for_break)
+
 
 
     def start_timer_attack(self):
@@ -343,6 +349,8 @@ class Level:
                 f['color']=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
             for j in f['rects']:
                 pygame.draw.rect(self.screen, f['color'], j, 5)
+    def callback_for_break(self):
+        self.lunch_break=True
     def rects_team(self):
         for h in self.q:
             for n in self.list:
@@ -356,7 +364,7 @@ class Level:
 
     def controller(self,event):
         for u in event:
-            if u.type == h and len(self.q) > 0 and self.can_attack(4):
+            if u.type == h and len(self.q) > 0 and self.can_attack(4) and not self.lunch_break:
                 random1=random.randint(0, len(self.q) - 1)
                 d=random.randint(1,self.v)
                 self.v=self.v-1 if d!=1 else self.v+1
