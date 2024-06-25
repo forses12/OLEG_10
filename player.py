@@ -1,4 +1,4 @@
-import pygame,observer
+import pygame,observer,x
 CODE_DEAD=1
 
 class Player(observer.Observer):
@@ -6,10 +6,6 @@ class Player(observer.Observer):
         self.image = 'images/player/player.png'
         image = pygame.image.load(self.image)
         size = [15 * 3, 16 * 3]
-        self.heart_image = 'images/player/heart.png'
-        image_heart = pygame.image.load(self.heart_image)
-        size_for_heart = [image_heart.get_width() * 0.5,image_heart.get_height()*0.5]
-
         self.enemies=enemies
         self.image = pygame.transform.scale(image, size)
         self.screen = pygame.display.get_surface()
@@ -17,9 +13,12 @@ class Player(observer.Observer):
         self.alive=True
         self.heart=3
         observer.Observer.__init__(self)
+        self.j=x.X([50,50],self.heart,50,'images/player/player.png',5)
     def sozdowatel(self):
         if self.alive:
-         self.screen.blit(self.image, self.rect)
+            self.screen.blit(self.image, self.rect)
+
+        self.j.painting()
     def model(self,):
         self.hit()
 
@@ -32,9 +31,11 @@ class Player(observer.Observer):
             if e.type == pygame.MOUSEMOTION:
                 self.rect.centerx = e.pos[0]
     def hit(self):
-        for enemy in self.enemies:
+        for enemy in self.enemies.copy():
             if enemy.rect.collidepoint(self.rect.center):
-                self.alive=False
+                self.enemies.remove(enemy)
+                self.heart -= 1
+                self.j.how_many = self.heart
                 self._notify(CODE_DEAD)
                 print(self.alive)
 

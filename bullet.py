@@ -1,4 +1,3 @@
-
 import pygame, math_utils, enemy, random,player
 
 image = 'images/flies/bullet_red_down.png'
