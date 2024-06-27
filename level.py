@@ -368,7 +368,7 @@ class Level:
                 random1=random.randint(0, len(self.q) - 1)
                 d=random.randint(1,self.v)
                 self.v=self.v-1 if d!=1 else self.v+1
-                a=self.enemy_callback if d==1 else None
+                a=self.enemy_callback if d==d else None
                 self.q[random1].attack(self.p,a )
             v=self.finder(u)
             if None is v:

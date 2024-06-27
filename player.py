@@ -10,12 +10,12 @@ class Player(observer.Observer):
         self.image = pygame.transform.scale(image, size)
         self.screen = pygame.display.get_surface()
         self.rect = pygame.Rect(where, size)
-        self.alive=True
+        self.alive_=True
         self.heart=3
         observer.Observer.__init__(self)
-        self.j=x.X([50,50],self.heart,50,'images/player/player.png',5)
+        self.j=x.X([940,10],self.heart,50,'images/player/player.png',10)
     def sozdowatel(self):
-        if self.alive:
+        if self.alive_:
             self.screen.blit(self.image, self.rect)
 
         self.j.painting()
@@ -34,10 +34,24 @@ class Player(observer.Observer):
         for enemy in self.enemies.copy():
             if enemy.rect.collidepoint(self.rect.center):
                 self.enemies.remove(enemy)
-                self.heart -= 1
-                self.j.how_many = self.heart
-                self._notify(CODE_DEAD)
-                print(self.alive)
+                self.alive=False
+
+
+
+    @property
+    def alive(self):
+        return self.alive_
+
+    @alive.setter
+    def alive(self,what):
+        self.alive_=what
+
+        if what==False:
+            self.heart -= 1
+            self.j.how_many = self.heart
+            self._notify(CODE_DEAD)
+            print('esrxfdcggv')
+
 
 
 
